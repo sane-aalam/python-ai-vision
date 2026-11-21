@@ -1,0 +1,142 @@
+# ==============================================================================
+# Git Ignore Configuration: Python AI Vision Repository
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Secrets, Credentials & Environment Configurations
+# ------------------------------------------------------------------------------
+.env
+.env.*
+*.env
+*.secret
+*.secrets
+secrets.json
+credentials.json
+client_secret*.json
+auth_token*.json
+
+# Private keys, certificates & tokens
+*.pem
+*.key
+*.cert
+*.crt
+*.pfx
+*.p12
+id_rsa*
+id_ed25519*
+
+# ------------------------------------------------------------------------------
+# 2. Large Binary Model Assets & Weights
+# ------------------------------------------------------------------------------
+# Auto-downloaded by download_model.py; keep repo lightweight
+*.task
+models/*.task
+01-virtual-mouse/models/*.task
+*.weights
+*.h5
+*.onnx
+*.tflite
+*.pt
+*.pth
+
+# ------------------------------------------------------------------------------
+# 3. Python Bytecode, Caches & Intermediate Builds
+# ------------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ------------------------------------------------------------------------------
+# 4. Virtual Environments
+# ------------------------------------------------------------------------------
+venv/
+.venv/
+env/
+.env/
+ENV/
+env.bak/
+venv.bak/
+
+# ------------------------------------------------------------------------------
+# 5. Testing, Profiling & Coverage
+# ------------------------------------------------------------------------------
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# ------------------------------------------------------------------------------
+# 6. IDEs & Code Editor Configurations
+# ------------------------------------------------------------------------------
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# ------------------------------------------------------------------------------
+# 7. Operating System Metadata
+# ------------------------------------------------------------------------------
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Linux
+*~
+.directory
+
+# ------------------------------------------------------------------------------
+# 8. Temporary Media & Video Recordings
+# ------------------------------------------------------------------------------
+*.mp4
+*.avi
+*.mkv
+*.mov
+captures/
+recordings/
+logs/
+*.log
