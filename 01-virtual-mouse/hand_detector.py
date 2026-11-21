@@ -92,3 +92,27 @@ class MediaPipeTasksDetector(BaseHandDetector):
         index_mcp = np.array(pixel_landmarks[5], dtype=np.float32)
         dist = float(np.linalg.norm(wrist - index_mcp))
         return max(dist, 1.0)  # Avoid zero-division
+
+    @staticmethod
+    def count_raised_fingers(pixel_landmarks: Dict[int, Tuple[int, int]]) -> Tuple[int, List[bool]]:
+        """
+        Counts extended fingers (0-5) by comparing tip Y positions to PIP Y positions.
+        Returns (count, [thumb_up, index_up, middle_up, ring_up, pinky_up]).
+        """
+        fingers_up = [False, False, False, False, False]
+        # Thumb: Distance from Thumb Tip (4) to Pinky MCP (17) vs Thumb IP (3) to Pinky MCP (17).
+        # This distance metric is 100% invariant to Left vs. Right hand orientation.
+        thumb_tip = np.array(pixel_landmarks[4], dtype=np.float32)
+        thumb_ip = np.array(pixel_landmarks[3], dtype=np.float32)
+        pinky_mcp = np.array(pixel_landmarks[17], dtype=np.float32)
+        fingers_up[0] = bool(np.linalg.norm(thumb_tip - pinky_mcp) > np.linalg.norm(thumb_ip - pinky_mcp))
+
+        # 4 Fingers: Tip Y < PIP Y
+        tip_ids = [8, 12, 16, 20]
+        pip_ids = [6, 10, 14, 18]
+        for i, (tip, pip) in enumerate(zip(tip_ids, pip_ids)):
+            if pixel_landmarks[tip][1] < pixel_landmarks[pip][1]:
+                fingers_up[i + 1] = True
+
+        return sum(fingers_up), fingers_up
+
